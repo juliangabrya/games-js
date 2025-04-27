@@ -33,6 +33,16 @@ let paddle2 = {
     y: gameHeight - 100
 };
 
+function bounceSound(){
+        var bounceSound = new Howl({
+            src: ['bounce.wav'],
+            volume: 100,
+        });
+        bounceSound.play();
+
+
+}
+
 //window.addEventListener("keydown", changeDirection);
 
 setTimeout(loop, 100)
@@ -107,9 +117,11 @@ function drawBall(ballX,ballY){
 function checkCollision(){
     if(ballY <= 0 +ballRadius){
         ballYDirection *= -1;
+        bounceSound()
     }
     if(ballY >= gameHeight - ballRadius){
         ballYDirection *= -1;
+        bounceSound()
     }
     if(ballX <= 0){
         player2Score+=1
@@ -128,6 +140,7 @@ function checkCollision(){
             ballX=(paddle1.x + paddle1.width) + ballRadius;
             ballXDirection *= -1;
             ballSpeed += 1;
+            bounceSound()
         }
     }
 
@@ -136,6 +149,7 @@ function checkCollision(){
             ballX= paddle2.x - ballRadius;
             ballXDirection *= -1;
             ballSpeed += 1;
+            bounceSound()
         }
     }
 };
